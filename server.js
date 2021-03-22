@@ -7,17 +7,13 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (request, response) => {
-    response.send("server is up and running on port 8080");
-});
-
 app.get("/images", (request, response) => {
     getImages()
-        .then((images) => response.send(images))
+        .then((images) => response.json(images))
         .catch((error) => {
-            console.log("ERROR:", error);
+            console.log("cannot get images:", error);
             response.sendStatus(500);
         });
 });
 
-app.listen(8080);
+app.listen(8080, () => console.log("server is up and running on port 8080"));

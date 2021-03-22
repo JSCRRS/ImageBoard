@@ -1,10 +1,30 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>imageboard</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <main id="main">
+
+        <h1>{{ title }}</h1>
+
+        <h3>{{ news }}</h3>
+        
+        <ul v-if="images.length > 0" class="images">
+            <li v-for="image in images">
+                <article class="image">
+                    <img :src="image.url" :alt="image.description">
+                    <p class="description">{{ image.description }}</p>
+                </article>
+            </li>
+        </ul>
+
+    </main>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
