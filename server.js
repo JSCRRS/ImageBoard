@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 
+const { getImages } = require("./db");
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -10,7 +12,9 @@ app.get("/", (request, response) => {
 });
 
 app.get("/images", (request, response) => {
-    response.send("images");
+    getImages()
+        .then((images) => response.send(images))
+        .catch((error) => console.log("ERROR:", error));
 });
 
 app.listen(8080);
