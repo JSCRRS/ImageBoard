@@ -14,7 +14,10 @@ app.get("/", (request, response) => {
 app.get("/images", (request, response) => {
     getImages()
         .then((images) => response.send(images))
-        .catch((error) => console.log("ERROR:", error));
+        .catch((error) => {
+            console.log("ERROR:", error);
+            response.sendStatus(500);
+        });
 });
 
 app.listen(8080);
