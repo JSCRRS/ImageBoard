@@ -9,19 +9,43 @@
 <body>
     <main id="main">
 
-        <h1>{{ title }}</h1>
+        <h1>Imageboard</h1>
 
         <h3>{{ news }}</h3>
-        
+
+ <form enctype="multipart/form-data" action="/images" method="POST" v-on:submit.prevent="onSubmit">
+    <div class="fields">        
+        <div class="field">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" v-model="title" required/>
+        </div>
+        <div class="field">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" v-model="description" required/>
+        </div>
+        <div class="field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" v-model="username" required/>
+        </div>
+        <div class="field center">
+            <input type="file" id="image" name="image" ref="image" accept="image/*" v-on:change="onFileSelect" required/>
+        </div>
+        <div class="field center">
+            <button type="submit" class="action">Upload!</button>
+        </div>
+    </div>
+    </form>
+
         <ul v-if="images.length > 0" class="images">
             <li v-for="image in images">
-                <article class="image">
-                    <img :src="image.url" :alt="image.description">
+                <article class="imageBox">
+                    <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
                     <p class="description">{{ image.description }}</p>
                 </article>
             </li>
         </ul>
 
+  
     </main>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>

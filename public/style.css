@@ -8,3 +8,33 @@ body {
     /*background-color: ;*/
     font-family: BrutGrotesqueBook, Helvetica, Arial, sans-serif; /*Roboto?*/
 }
+
+/* UPLOAD FIELD*/
+
+.fields {
+    display: flex;
+    margin-left: 30px;
+}
+
+.field {
+    margin-right: 10px;
+}
+
+.images {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.imageBox {
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.uploadetImages {
+    border-radius: 7px;
+    width: 25rem;
+    height: 20rem;
+    object-fit: cover;
+}
