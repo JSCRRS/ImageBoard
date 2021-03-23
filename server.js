@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const { getImages } = require("./db");
-const { uploader } = require("./uploads/uploads");
+const { uploader } = require("./upload");
 
 const app = express();
 
