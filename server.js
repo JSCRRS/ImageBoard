@@ -19,7 +19,8 @@ app.get("/images", (request, response) => {
 
 app.post("/images", uploader.single("file"), (request, response) => {
     console.log("upload successful", request.file, request.body);
-    response.sendStatus(200).catch((error) => console.log(error));
+
+    response.sendStatus(200);
 });
 /*.then((image) => response.json(image))
         .catch((error) => {
