@@ -46,9 +46,9 @@
             </li>
         </ul>
 
-    <p v-if="!clickedImage">Jetzt noch keine Anzeige!</p>
     
-    <modal v-bind:image-Id="clickedImage"></modal>
+    <modal v-if="clickedImage"
+    v-bind:image-id="clickedImage"></modal>
 
     </main>
 

@@ -9,8 +9,8 @@
             };
         },
         mounted: function () {
-            console.log("[vue:modal] getting image info", this.imageId);
-            /*  axios.get(`/images/${this.imageId}`).then((response) => {
+            console.log("[vue:modal] getting image id", this.imageId);
+            /*             axios.get(`/images/${this.imageId}`).then((response) => {
                 this.image = response.data;
             }); */
         },
@@ -38,7 +38,7 @@
                 //console.log(id);
                 this.clickedImage = id;
                 console.log(
-                    "[vue:original] getting image info",
+                    "[vue:original] getting image id",
                     this.clickedImage
                 );
 
