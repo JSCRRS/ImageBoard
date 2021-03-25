@@ -72,12 +72,14 @@ li {
 .modal {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .modalImageBox {
     border: 1px solid black;
     border-radius: 7px;
     padding: 5px;
+    position: relative;
 }
 
 .modalImage {
@@ -85,4 +87,10 @@ li {
     width: auto;
     height: auto;
     object-fit: cover;
+}
+
+.button-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

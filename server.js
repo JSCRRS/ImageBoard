@@ -22,6 +22,7 @@ app.post("/images", uploader.single("file"), s3upload, (request, response) => {
     const url = `https://s3.amazonaws.com/spicedling/${request.file.filename}`;
     createImage({ url, ...request.body })
         .then((image) => response.json(image))
+        //--> hier noch error/early return
         //render images!
         .catch((error) => {
             console.log("[imageboard:express] error saving image", error);
@@ -33,6 +34,7 @@ app.get("/images/:imageId", (request, response) => {
     const imageId = request.params.imageId;
     getImageById(imageId)
         .then((result) => {
+            //hier noch error/early return!
             response.json(result);
         })
         .catch((error) => {

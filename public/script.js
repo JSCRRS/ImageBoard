@@ -13,6 +13,11 @@
                 this.image = response.data[0];
             });
         },
+        methods: {
+            onButtonClick: function () {
+                this.$emit("click");
+            },
+        },
     });
 
     new Vue({
@@ -43,6 +48,10 @@
 
                 //console.log(this.clickedImage);
             },
+            closeImageBox: function () {
+                this.clickedImage = null;
+            },
+
             onSubmit: function () {
                 const formData = new FormData();
                 formData.append("title", this.title);

@@ -48,7 +48,8 @@
 
     
     <modal v-if="clickedImage"
-    v-bind:image-id="clickedImage"></modal>
+    v-bind:image-id="clickedImage"
+    @click="closeImageBox"></modal>
 
     </main>
 
@@ -57,6 +58,7 @@
  <script id="modal" type="text/x-template">
     <div class="modal">
     <article class="modalImageBox">
+        <button v-on:click="onButtonClick" class="button-close">X</button>
 
         <img class="modalImage" :src="image.url" :alt="image.title"> 
         <p>{{image.title}}</p>
