@@ -1,7 +1,8 @@
 const express = require("express");
 const path = require("path");
-const { getImages } = require("./db");
 const { uploader } = require("./upload");
+const { s3upload } = require("./s3");
+const { createImage, getImages, getImageById } = require("./db");
 
 const app = express();
 
@@ -12,35 +13,35 @@ app.get("/images", (request, response) => {
     getImages()
         .then((images) => response.json(images))
         .catch((error) => {
-            console.log("cannot get images:", error);
+            console.log("[imageboard:express] error getting images:", error);
             response.sendStatus(500);
         });
 });
 
-app.post("/images", uploader.single("file"), (request, response) => {
-    console.log("upload successful", request.file, request.body);
-
-    response.sendStatus(200);
-});
-/*.then((image) => response.json(image))
+app.post("/images", uploader.single("file"), s3upload, (request, response) => {
+    const url = `https://s3.amazonaws.com/spicedling/${request.file.filename}`;
+    createImage({ url, ...request.body })
+        .then((image) => response.json(image))
+        //render images!
         .catch((error) => {
-            console.log("cannot save image:", error);
+            console.log("[imageboard:express] error saving image", error);
             response.sendStatus(500);
         });
-});*/
-
-app.get("/upload", (request, response) => {
-    response.send(`
-    <form enctype="multipart/form-data" action="/upload" method="POST">
-        <input type="file" accept="image/*" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
-    `);
 });
 
-app.post("/upload", uploader.single("file"), (request, response) => {
-    console.log("upload successful", request.file, request.body);
-    response.sendStatus(200).catch((error) => console.log(error));
+app.get("/images/:imageId", (request, response) => {
+    const imageId = request.params.imageId;
+    getImageById(imageId)
+        .then((result) => {
+            response.json(result);
+        })
+        .catch((error) => {
+            console.log(
+                "[imageboard:express] error getting image by id",
+                error
+            );
+            response.sendStatus(500);
+        });
 });
 
 app.listen(8080, () => console.log("server is up and running on port 8080"));

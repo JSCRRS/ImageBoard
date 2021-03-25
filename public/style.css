@@ -20,10 +20,38 @@ body {
     margin-right: 10px;
 }
 
+#title,
+#description,
+#username {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+/* .uploadButton {
+    padding: 0.35em 1.2em;
+    border: 0.1em solid black;
+    border-radius: 0.12em;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.uploadButton:hover {
+    color: #000000;
+    background-color: lightgrey;
+} */
+
+/* IMAGES */
+
 .images {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     list-style-type: none;
+    flex-wrap: wrap;
+}
+
+li {
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .imageBox {

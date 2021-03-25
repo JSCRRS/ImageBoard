@@ -11,8 +11,6 @@
 
         <h1>Imageboard</h1>
 
-        <h3>{{ news }}</h3>
-
  <form enctype="multipart/form-data" action="/images" method="POST" v-on:submit.prevent="onSubmit">
     <div class="fields">        
         <div class="field">
@@ -31,13 +29,16 @@
             <input type="file" id="image" name="image" ref="image" accept="image/*" v-on:change="onFileSelect" required/>
         </div>
         <div class="field center">
-            <button type="submit" class="action">Upload!</button>
+            <button class="uploadButton" type="submit" class="action">Upload!</button>
         </div>
     </div>
     </form>
 
+    <h3>newest images:</h3>
+
         <ul v-if="images.length > 0" class="images">
-            <li v-for="image in images">
+            <li v-for="image in images" 
+            v-on:click="onImageClick(image.id)">
                 <article class="imageBox">
                     <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
                     <p class="description">{{ image.description }}</p>
@@ -45,8 +46,25 @@
             </li>
         </ul>
 
-  
+    <p v-if="!clickedImage">Jetzt noch keine Anzeige!</p>
+    
+    <modal v-bind:image-Id="clickedImage"></modal>
+
     </main>
+
+<!-- So soll das modal aussehen:
+ -->
+ <script id="modal" type="text/x-template">
+    <div class="modal">
+
+        <h2>{{ test }}</h2>
+        <p>{{imageId}}</p>
+        <p>{{image.title}}</p>
+
+    </div>
+</script>
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="./script.js"></script>
