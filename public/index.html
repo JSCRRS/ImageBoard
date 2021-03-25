@@ -56,11 +56,18 @@
  -->
  <script id="modal" type="text/x-template">
     <div class="modal">
+    <article class="modalImageBox">
 
-        <h2>{{ test }}</h2>
-        <p>{{imageId}}</p>
+        <img class="modalImage" :src="image.url" :alt="image.title"> 
         <p>{{image.title}}</p>
 
+
+        <p class="description">{{ image.description }}</p>
+        <p>{{image.username}}</p>
+        <p>{{image.created_at}}</p>
+
+
+    </article>
     </div>
 </script>
 

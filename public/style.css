@@ -66,3 +66,23 @@ li {
     height: 20rem;
     object-fit: cover;
 }
+
+/* MODAL */
+
+.modal {
+    display: flex;
+    justify-content: center;
+}
+
+.modalImageBox {
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.modalImage {
+    border-radius: 7px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}

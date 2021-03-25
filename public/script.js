@@ -4,15 +4,14 @@
         props: ["imageId"],
         data: function () {
             return {
-                test: "its a trap",
                 image: {},
             };
         },
         mounted: function () {
-            console.log("[vue:modal] getting image id", this.imageId);
-            /*             axios.get(`/images/${this.imageId}`).then((response) => {
-                this.image = response.data;
-            }); */
+            console.log("[vue:modal] getting image id:", this.imageId);
+            axios.get(`/images/${this.imageId}`).then((response) => {
+                this.image = response.data[0];
+            });
         },
     });
 
