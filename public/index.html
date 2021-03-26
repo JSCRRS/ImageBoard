@@ -37,8 +37,9 @@
     <h3>newest images:</h3>
 
         <ul v-if="images.length > 0" class="images">
-            <li v-for="image in images" 
-            v-on:click="onImageClick(image.id)">
+            <li 
+                v-for="image in images" 
+                v-on:click="onImageClick(image.id)">
                 <article class="imageBox">
                     <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
                     <p class="description">{{ image.description }}</p>
@@ -46,10 +47,11 @@
             </li>
         </ul>
 
-    
-    <modal v-if="clickedImage"
-    v-bind:image-id="clickedImage"
-    @click="closeImageBox"></modal>
+    <modal 
+        v-if="clickedImage"
+        v-bind:image-id="clickedImage"
+        @click="closeImageBox"
+    ></modal>
 
     </main>
 
@@ -58,19 +60,43 @@
  <script id="modal" type="text/x-template">
     <div class="modal">
     <article class="modalImageBox">
-        <button v-on:click="onButtonClick" class="button-close">X</button>
+        <button 
+            v-on:click="onButtonClick" class="button-close">X</button>
 
         <img class="modalImage" :src="image.url" :alt="image.title"> 
+
         <p>{{image.title}}</p>
-
-
         <p class="description">{{ image.description }}</p>
         <p>{{image.username}}</p>
         <p>{{image.created_at}}</p>
 
+        <!-- Im modal soll noch ein component rein: -->
+        <comments v-bind:image-id="clickedImage"></comments>
 
     </article>
     </div>
+</script>
+
+<script id="comments" type="text/x-template">
+    <section class="comments">
+
+        <ul class="comments-list" 
+            v-if="comments.length > 0">
+            <li v-for="comment in comments">
+                <p>{{comment.text}}</p> 
+                <p>{{comment.username}}</p>
+                <p>comment.created_at</p>
+            </li>
+        </ul>
+
+        <form method="post" v-on:submit.prevent="onSubmit">
+            
+            <input type="text" id="comment-username" name="username" v-model="username" required placeholder="username"/>
+            <textarea name="text" id="comment-text" rows="6" v-model="text" required></textarea>
+            <button type="submit">Comment!</button>
+
+        </form>
+    </section>
 </script>
 
 

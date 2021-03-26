@@ -2,7 +2,12 @@ const express = require("express");
 const path = require("path");
 const { uploader } = require("./upload");
 const { s3upload } = require("./s3");
-const { createImage, getImages, getImageById } = require("./db");
+const {
+    createImage,
+    getImages,
+    getImageById,
+    addCommentToImage,
+} = require("./db");
 
 const app = express();
 

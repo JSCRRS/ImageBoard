@@ -20,6 +20,45 @@
         },
     });
 
+    Vue.component("comments", {
+        template: "#comments",
+        props: ["imageId"],
+        data: function () {
+            return {
+                comments: [],
+                text: "",
+                username: "",
+            };
+        },
+        mounted: function () {
+            console.log("[vue:comments] getting image id:", this.imageId);
+
+            axios.get(`/images/${this.imageId}/comments`).then((response) => {
+                console.log("[vue:comments] getting response:", response.data);
+                this.comments = response.data;
+            });
+        },
+        methods: {
+            onSubmit: function () {
+                axios
+                    .post(`/images/${this.imageId}/comments`, {
+                        username: this.username,
+                        text: this.text,
+                        imageId: this.imageId,
+                    })
+                    .then((response) => {
+                        this.comments.push(response.data);
+                        console.log(
+                            "[vue:comments], pushing comments:",
+                            response.data
+                        );
+                        this.username = "";
+                        this.text = "";
+                    });
+            },
+        },
+    });
+
     new Vue({
         el: "#main",
         data: {
