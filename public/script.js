@@ -69,11 +69,15 @@
             file: null,
             images: [],
             clickedImage: null,
+            lastImageID: null,
+            IMG_LIMIT: 3,
+            imagesAvailable: true,
         },
         mounted: function () {
             // keine arrow-function, weil sonst this sich auf window bezieht (Kontext ändert sich)
             axios.get("/images").then((response) => {
                 this.images = response.data;
+                this.lastImageID = response.data[response.data.length - 1].id;
             }); //this bezieht sich hier auf Vue
         },
         methods: {
@@ -89,6 +93,43 @@
             },
             closeImageBox: function () {
                 this.clickedImage = null;
+            },
+
+            onMoreImagesClick: function () {
+                this.getMoreImages();
+            },
+
+            getMoreImages: function () {
+                axios
+                    .get("/images", {
+                        params: {
+                            last_id: this.lastImageID,
+                            limit: this.IMG_LIMIT,
+                        },
+                    })
+                    .then((response) => {
+                        /*                         console.log(
+                            "[vue:original] this lastImageID:",
+                            this.lastImageID
+                        );
+                        console.log("[vue:original] this.images:", this.images);
+                        console.log(
+                            "[vue:original] response.data:",
+                            response.data,
+                            response.data.length,
+                            response.data[response.data.length - 1].id
+                        ); */
+                        this.images = [...this.images, ...response.data];
+                        this.lastImageID =
+                            response.data[response.data.length - 1].id;
+
+                        if (
+                            response.data.length !== this.IMG_LIMIT ||
+                            this.lastImageID === 1
+                        ) {
+                            this.imagesAvailable = false;
+                        }
+                    });
             },
 
             onSubmit: function () {

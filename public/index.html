@@ -47,7 +47,10 @@
             </li>
         </ul>
     
-    <button>More</button>
+    <button 
+    v-if="images.length > 0 && imagesAvailable"
+    v-on:click="onMoreImagesClick"
+    >More</button>
 
     <modal 
         v-if="clickedImage"
