@@ -31,7 +31,7 @@ function createImage({ url, title, description, username }) {
         .then((result) => result.rows[0]);
 }
 
-function addCommentToImage({ username, image_id, text }) {
+function addCommentToImage({ image_id, username, text }) {
     return db
         .query(
             "INSERT INTO comments (username, image_id, text) VALUES ($1, $2, $3) RETURNING *",

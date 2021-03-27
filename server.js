@@ -8,7 +8,6 @@ const {
     getImageById,
     addCommentToImage,
 } = require("./db");
-const { request } = require("express");
 
 const app = express();
 
@@ -59,12 +58,22 @@ app.get("/images/:imageId", (request, response) => {
 }); */
 
 app.post("/images/:imageId/comments", (request, response) => {
-    //speicher imageId + username + text im table comments
-    //nimm image id
-    const imageId = request.params.imageId;
-    // nimm username
-    const details = { ...request.body };
-    console.log("[comments:express] post-details:", imageId, details);
+    const image_id = request.params.imageId;
+    //const details = { ...request.body };
+    //console.log("[comments:express] post-details:", image_id, details);
+
+    addCommentToImage({ image_id, ...request.body })
+        .then((result) => {
+            //console.log("[comments:express]: addet to image:", result);
+            response.json(result);
+        })
+        .catch((error) => {
+            console.log(
+                "[comments:express] cannot add comment to image",
+                error
+            );
+            response.sendStatus(500);
+        });
 });
 
 app.listen(8080, () => console.log("server is up and running on port 8080"));
