@@ -8,11 +8,13 @@ const {
     getImageById,
     addCommentToImage,
 } = require("./db");
+const { request } = require("express");
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get("/images", (request, response) => {
     getImages()
@@ -49,6 +51,20 @@ app.get("/images/:imageId", (request, response) => {
             );
             response.sendStatus(500);
         });
+});
+
+/* app.get("/images/:imageId/comments", (request, response) => {
+    const imageId = request.params.imageId;
+    //zeige die comments des jeweiligen Bildes
+}); */
+
+app.post("/images/:imageId/comments", (request, response) => {
+    //speicher imageId + username + text im table comments
+    //nimm image id
+    const imageId = request.params.imageId;
+    // nimm username
+    const details = { ...request.body };
+    console.log("[comments:express] post-details:", imageId, details);
 });
 
 app.listen(8080, () => console.log("server is up and running on port 8080"));

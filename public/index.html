@@ -50,7 +50,7 @@
     <modal 
         v-if="clickedImage"
         v-bind:image-id="clickedImage"
-        @click="closeImageBox"
+        v-on:click="closeImageBox" 
     ></modal>
 
     </main>
@@ -71,7 +71,7 @@
         <p>{{image.created_at}}</p>
 
         <!-- Im modal soll noch ein component rein: -->
-        <comments v-bind:image-id="clickedImage"></comments>
+        <comments v-bind:image-id="imageId"></comments>
 
     </article>
     </div>

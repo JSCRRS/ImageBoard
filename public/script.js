@@ -81,7 +81,7 @@
                 //console.log(id);
                 this.clickedImage = id;
                 console.log(
-                    "[vue:original] getting image id",
+                    "[vue:original] getting image id:",
                     this.clickedImage
                 );
 
