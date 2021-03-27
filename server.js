@@ -7,6 +7,7 @@ const {
     getImages,
     getImageById,
     addCommentToImage,
+    getCommentById,
 } = require("./db");
 
 const app = express();
@@ -52,10 +53,19 @@ app.get("/images/:imageId", (request, response) => {
         });
 });
 
-/* app.get("/images/:imageId/comments", (request, response) => {
+app.get("/images/:imageId/comments", (request, response) => {
     const imageId = request.params.imageId;
-    //zeige die comments des jeweiligen Bildes
-}); */
+
+    getCommentById(imageId)
+        .then((result) => {
+            //console.log("[comments:express] here are the comments:", result);
+            response.json(result);
+        })
+        .catch((error) => {
+            console.log("[comments:express] error getting comment:", error);
+            response.sendStatus(500);
+        });
+});
 
 app.post("/images/:imageId/comments", (request, response) => {
     const image_id = request.params.imageId;

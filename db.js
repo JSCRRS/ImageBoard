@@ -31,6 +31,12 @@ function createImage({ url, title, description, username }) {
         .then((result) => result.rows[0]);
 }
 
+function getCommentById(id) {
+    return db
+        .query("SELECT * FROM comments WHERE image_id = $1", [id])
+        .then((result) => result.rows);
+}
+
 function addCommentToImage({ image_id, username, text }) {
     return db
         .query(
@@ -45,4 +51,5 @@ module.exports = {
     createImage,
     getImageById,
     addCommentToImage,
+    getCommentById,
 };

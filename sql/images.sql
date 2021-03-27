@@ -18,8 +18,6 @@ CREATE TABLE comments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
 
-
-
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/imageboard/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',
     'funkychicken',
