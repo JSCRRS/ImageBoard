@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/images", (request, response) => {
-    getImages()
+    getImages(request.query)
         .then((images) => response.json(images))
         .catch((error) => {
             console.log("[imageboard:express] error getting images:", error);

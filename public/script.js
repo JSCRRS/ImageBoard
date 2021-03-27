@@ -8,7 +8,7 @@
             };
         },
         mounted: function () {
-            console.log("[vue:modal] getting image id:", this.imageId);
+            //console.log("[vue:modal] getting image id:", this.imageId);
             axios.get(`/images/${this.imageId}`).then((response) => {
                 this.image = response.data[0];
             });
@@ -31,10 +31,10 @@
             };
         },
         mounted: function () {
-            console.log("[vue:comments] getting image id:", this.imageId);
-
+            /*             console.log("[vue:comments] getting image id:", this.imageId);
+             */
             axios.get(`/images/${this.imageId}/comments`).then((response) => {
-                console.log("[vue:comments] getting response:", response.data);
+                //console.log("[vue:comments] getting response:", response.data);
                 this.comments = response.data;
             });
         },
@@ -48,10 +48,10 @@
                     })
                     .then((response) => {
                         this.comments.push(response.data);
-                        console.log(
+                        /*       console.log(
                             "[vue:comments], pushing comments:",
                             response.data
-                        );
+                        ); */
                         this.username = "";
                         this.text = "";
                     });
@@ -80,10 +80,10 @@
             onImageClick: function (id) {
                 //console.log(id);
                 this.clickedImage = id;
-                console.log(
+                /* console.log(
                     "[vue:original] getting image id:",
                     this.clickedImage
-                );
+                ); */
 
                 //console.log(this.clickedImage);
             },
