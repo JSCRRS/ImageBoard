@@ -41,7 +41,9 @@
                 v-for="image in images" 
                 v-on:click="onImageClick(image.id)">
                 <article class="imageBox">
-                    <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
+                    <a v-bind:href="'#' + image.id">
+                        <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
+                    </a>
                     <p class="description">{{ image.description }}</p>
                 </article>
             </li>

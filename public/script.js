@@ -8,14 +8,25 @@
             };
         },
         mounted: function () {
+            console.log("[vue:modal] mounted", this.imageId);
+            this.getInfo();
             //console.log("[vue:modal] getting image id:", this.imageId);
-            axios.get(`/images/${this.imageId}`).then((response) => {
-                this.image = response.data[0];
-            });
         },
         methods: {
             onButtonClick: function () {
                 this.$emit("click");
+            },
+            getInfo: function () {
+                console.log("[vue:modal] gettingo info", this.imageId);
+                axios.get(`/images/${this.imageId}`).then((response) => {
+                    this.image = response.data[0];
+                });
+            },
+        },
+        watch: {
+            imageId: function () {
+                console.log("[vue:modal] imageId changed", this.imageId);
+                this.getInfo();
             },
         },
     });
@@ -79,6 +90,13 @@
                 this.images = response.data;
                 this.lastImageID = response.data[response.data.length - 1].id;
             }); //this bezieht sich hier auf Vue
+            window.addEventListener("hashchange", () => {
+                /*                 console.log(
+                    "[vue:original] hash changed",
+                    window.location.hash
+                ); */
+                this.clickedImage = window.location.hash.slice(1);
+            });
         },
         methods: {
             onImageClick: function (id) {
