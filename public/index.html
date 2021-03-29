@@ -41,13 +41,13 @@
 
         <ul v-if="images.length > 0" class="images">
             <li 
-                v-for="image in images" 
-                v-on:click="onImageClick(image.id)">
+                v-for="image in images"
+                >
                 <article class="imageBox">
                     <a class="imageLink" v-bind:href="'#' + image.id">
                         <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
+                        <span class="mainDescription">{{ image.description }}</span>
                     </a>
-                    <p class="mainDescription">{{ image.description }}</p>
                 </article>
             </li>
         </ul>
@@ -91,6 +91,8 @@
 <script id="comments" type="text/x-template">
     <section class="comments">
 
+        <p v-if="comments.length < 1" class="no-comments">No comments yet!</p>
+
         <ul class="comments-list" 
             v-if="comments.length > 0">
             <li v-for="comment in comments">
@@ -98,14 +100,13 @@
                 <p>{{comment.text}}</p> 
             </li>
         </ul>
-
-        <form method="post" v-on:submit.prevent="onSubmit">
-            
+        
+        <form  method="post" v-on:submit.prevent="onSubmit">
             <input type="text" id="comment-username" name="username" v-model="username" required placeholder="username"/>
-            <textarea name="text" id="comment-text" rows="6" v-model="text" required></textarea>
+            <textarea name="text" row="1" id="comment-text" v-model="text" placeholder="comment" required></textarea>
             <button type="submit" class="buttons" >>> Comment!</button>
-
         </form>
+        
     </section>
 </script>
 

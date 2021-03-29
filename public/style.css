@@ -142,11 +142,13 @@ li {
 .comments {
     display: flex;
     flex-direction: column;
+    flex: 1;
     justify-content: space-between;
 }
 
 .comments-list {
     list-style-type: none;
+    flex: 1;
 }
 
 .comments-list li p {
@@ -158,8 +160,36 @@ li {
 }
 
 .comments form {
-    align-self: flex-end;
+    justify-self: flex-end;
 }
+
+#comment-username,
+#comment-text {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+#comment-username,
+#comment-text:focus {
+    outline: none;
+}
+
+.comments textarea {
+    font-family: BrutGrotesqueBook, Helvetica, Arial, sans-serif;
+    font-size: 13.3333px;
+    margin: 0;
+    padding: 0;
+    width: 139.667px;
+    height: 16px;
+    padding: 1px;
+}
+
+.no-comments {
+    margin-top: 100px;
+    align-self: center;
+}
+
+/* BUTTONS */
 
 .moreButton {
     display: flex;

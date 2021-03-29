@@ -95,12 +95,13 @@
                 this.lastImageID = response.data[response.data.length - 1].id;
             }); //this bezieht sich hier auf Vue
             window.addEventListener("hashchange", () => {
-                /*                 console.log(
+                console.log(
                     "[vue:original] hash changed",
                     window.location.hash
-                ); */
+                );
                 this.clickedImage = window.location.hash.slice(1);
             });
+            this.clickedImage = window.location.hash.slice(1);
         },
         methods: {
             onImageClick: function (id) {
@@ -115,6 +116,7 @@
             },
             closeImageBox: function () {
                 this.clickedImage = null;
+                window.location.hash = "";
             },
 
             onMoreImagesClick: function () {
