@@ -1,4 +1,8 @@
 (() => {
+    Vue.filter("formDate", function (value) {
+        return new Date(value).toLocaleString();
+    });
+
     Vue.component("modal", {
         template: "#modal",
         props: ["imageId"],

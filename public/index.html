@@ -26,10 +26,13 @@
             <input type="text" id="username" name="username" v-model="username" required/>
         </div>
         <div class="field center">
+            <label class="buttons">
             <input type="file" id="image" name="image" ref="image" accept="image/*" v-on:change="onFileSelect" required/>
+            >> Search File!
+            </label>
         </div>
         <div class="field center">
-            <button class="uploadButton" type="submit" class="action">Upload!</button>
+            <button class="uploadButton buttons" type="submit" class="action">>> Upload!</button>
         </div>
     </div>
     </form>
@@ -41,18 +44,18 @@
                 v-for="image in images" 
                 v-on:click="onImageClick(image.id)">
                 <article class="imageBox">
-                    <a v-bind:href="'#' + image.id">
+                    <a class="imageLink" v-bind:href="'#' + image.id">
                         <img class="uploadetImages" :src="image.url" :alt="image.title"> <!-- v-bind:src (v-bind shorthand); iterieren -->
                     </a>
-                    <p class="description">{{ image.description }}</p>
+                    <p class="mainDescription">{{ image.description }}</p>
                 </article>
             </li>
         </ul>
-    
-    <button 
+
+    <button  class="moreButton buttons"
     v-if="images.length > 0 && imagesAvailable"
     v-on:click="onMoreImagesClick"
-    >More</button>
+    >>> More!</button>
 
     <modal 
         v-if="clickedImage"
@@ -68,14 +71,15 @@
     <div class="modal">
     <article class="modalImageBox">
         <button 
-            v-on:click="onButtonClick" class="button-close">X</button>
+            v-on:click="onButtonClick" class="button-close buttons">X</button>
 
-        <img class="modalImage" :src="image.url" :alt="image.title"> 
-
-        <p>{{image.title}}</p>
-        <p class="description">{{ image.description }}</p>
-        <p>{{image.username}}</p>
-        <p>{{image.created_at}}</p>
+        <div class="imageAndDescription">
+            <img class="modalImage" :src="image.url" :alt="image.title"> 
+            <div class="imageDetails">
+                <p class="description">{{image.title}} - {{ image.description }}</p>
+                <p class="imageCreatorDetails">by {{image.username}} on {{image.created_at | formDate}}</p>
+            </div>
+        </div>
 
         <!-- Im modal soll noch ein component rein: -->
         <comments v-bind:image-id="imageId"></comments>
@@ -90,9 +94,8 @@
         <ul class="comments-list" 
             v-if="comments.length > 0">
             <li v-for="comment in comments">
+                <p class="commentator"><i>{{comment.username}}</i> - {{comment.created_at | formDate }}</p>
                 <p>{{comment.text}}</p> 
-                <p>{{comment.username}}</p>
-                <p>{{comment.created_at}}</p>
             </li>
         </ul>
 
@@ -100,7 +103,7 @@
             
             <input type="text" id="comment-username" name="username" v-model="username" required placeholder="username"/>
             <textarea name="text" id="comment-text" rows="6" v-model="text" required></textarea>
-            <button type="submit">Comment!</button>
+            <button type="submit" class="buttons" >>> Comment!</button>
 
         </form>
     </section>
